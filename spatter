@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import re
+import sys
+
+from libspatter import *
+from libspatter import spatter
+if __name__ == '__main__':
+    print (sys.path)
+    sys.path.remove('/home/bob/.local/lib/python3.8/site-packages')
+    print (sys.path)
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(spatter.main())
