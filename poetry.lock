@@ -1,0 +1,17 @@
+[[package]]
+category = "main"
+description = "read and write audio tags for many formats"
+name = "mutagen"
+optional = false
+python-versions = ">=3.5, <4"
+version = "1.44.0"
+
+[metadata]
+content-hash = "13081f4d30a86b379d38cc350f3838aa74137dfbbfda10336a33f0a913f90fcd"
+python-versions = "^3.6"
+
+[metadata.files]
+mutagen = [
+    {file = "mutagen-1.44.0-py3-none-any.whl", hash = "sha256:1cfc9f40cc0c89f051e3f3dbd5d9057a193c98433cf6c95e02d7f5a395615c01"},
+    {file = "mutagen-1.44.0.tar.gz", hash = "sha256:56065d8a9ca0bc64610a4d0f37e2bd4453381dde3226b8835ee656faa3287be4"},
+]
