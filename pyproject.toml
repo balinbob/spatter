@@ -1,14 +1,25 @@
+[tool.poetry]
+name = "spatter"
+version = "0.1.10"
+description = "used from the CLI or as a back-end to edit audio file names and metadata (tags)"
+authors = ["Robert Allred <balinbob@gmail.com>"]
+license = "GPL-3.0-or-later"
+include  = ["spatter"]
+
+packages = [
+    { include = "libspatter" },
+    { include = "bin" }
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.6"
+mutagen = "^1.38"
+[tool.poetry.dev-dependencies]
+
 [build-system]
-requires = ["flit_core >=2,<3"]
-build-backend = "flit_core.buildapi"
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
 
-[tool.flit.metadata]
-module = "libspatter"
-author = "Robert Allred"
-author-email = "balinbob@gmail.com"
-home-page = "https://github.com/balinbob/spatter"
-classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
-
-[tool.flit.scripts]
+[tool.poetry.scripts]
 spatter = "spatter:main"
-
