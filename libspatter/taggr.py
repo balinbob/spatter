@@ -4,8 +4,7 @@ from __future__ import absolute_import
 import re
 from os.path import sep
 
-#__version__ = '0.1.4'
-from spatter import __version__
+from libspatter import __version__
 
 class Subster():
     '''

@@ -13,9 +13,8 @@ import os
 from optparse import OptionParser as OP
 from mutagen import File
 from mutagen.mp3 import EasyMP3 as MP3
-from spatter.taggr import Subster
-#__version__ = '0.1.4'
-from spatter import __version__
+from libspatter.taggr import Subster
+from libspatter import __version__
 
 
 class Confirmer():
@@ -57,7 +56,7 @@ class Speaker():
         ''' print formatted messages '''
         if not self.quiet:
             if strng[:2] == '\n\t':
-                print('\n', ' ' *48, strng[2:],)
+                print(' ' *48, strng[2:],)
                 self.x += len(strng)
             elif strng[:1] == '\t':
                 strng += ' '*120
@@ -106,21 +105,20 @@ def main():
                   help='one or more characters to filter from tags used to build filenames',
                   metavar="'!@$&*/\?'")
     OP.add_option('-m', '--map', dest='map', action='store',
-                  help='replace all instances of a char with another char',
+                  help='replace all instances of a char with another char\nin conjunction with --tag2fn',
                   metavar="/ -")
     OP.add_option('-i', '--index', dest='idx', action='store_true',
                   help='index files by filename order (persistent file order)')
-
+    OP.add_option('-v', '--version', dest='vers', action='store_true', help='show version')
     
-    print ('%s %s' % (OP.get_prog_name(), __version__))
 
     argstr = ' '.join(args)
 
 
     if len(args) < 2:
         OP.print_usage()
-        print("version %s" % __version__)
-        print('-h|--help for help\n')
+#        print("version %s" % __version__)
+        print('-h|--help for help')
         sys.exit(1)
 
     p = '(-t|--tag|-a|--add|-p|--pattern|-r|--remove|-f|--files)\ +?\-[^\ ]*'
@@ -131,7 +129,8 @@ def main():
 
 
     (opt, fnames) = OP.parse_args()
-
+    if opt.vers:
+        print ('%s %s' % (OP.get_prog_name(), __version__))
     if opt.filenames:
         fnames += opt.filenames
 
@@ -172,7 +171,7 @@ def main():
             except IOError:
                 spkr.speak("\ncan't open %s" % fname)
                 continue
-            spkr.speak("\nprocessing %s" % fname)
+            spkr.speak("processing %s" % fname)
             if opt.clear:
                 mf.clear()
             for action in opt.remove or []:
@@ -236,7 +235,7 @@ def main():
             except IOError:
                 spkr.speak("can't open %s" % fname)
                 continue
-            spkr.speak('\n' + os.path.basename(fname))
+            spkr.speak(os.path.basename(fname))
 
             if opt.idx:
                 trn = mf.get('tracknumber', None)
@@ -262,7 +261,7 @@ def main():
                     k, v = action.split('=', 1)
                     if k and v:
                         mf.update({k:[v]})
-                        spkr.speak('\n\ttag set: ' + k + '=' + v)
+                        spkr.speak('\t\ttag set: ' + k + '=' + v)
             for action in opt.add or []:
                 if '=' in action:
                     k, v = action.split('=', 1)
